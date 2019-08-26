@@ -8,6 +8,7 @@ class Music(commands.Cog):
         self.bot = bot
 
     @commands.command()
+    @commands.is_owner()
     async def join(self, ctx, *, channel: discord.VoiceChannel):
         if ctx.voice_client is not None:
             return await ctx.voice_client.move_to(channel)
@@ -15,6 +16,7 @@ class Music(commands.Cog):
         await channel.connect()
 
     @commands.command()
+    @commands.is_owner()
     async def play(self, ctx, *, filename):
         if not discord.opus.is_loaded():
             discord.opus.load_opus("opuslib")
@@ -38,6 +40,7 @@ class Music(commands.Cog):
         await ctx.send('Now playing: {}'.format(filename))
 
     @commands.command()
+    @commands.is_owner()
     async def volume(self, ctx, volume: int):
         """Changes the player's volume"""
 
@@ -48,6 +51,7 @@ class Music(commands.Cog):
         await ctx.send("Changed volume to {}%".format(volume))
 
     @commands.command()
+    @commands.is_owner()
     async def stop(self, ctx):
         """Stops and disconnects the bot from voice"""
 
